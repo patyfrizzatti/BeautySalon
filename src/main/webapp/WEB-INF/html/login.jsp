@@ -4,40 +4,42 @@
 <head>
 <title>Beauty Salon - Login</title>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="css/main.css">
-<link
-	href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Pacifico"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i"
-	rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
+
 <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="css/animate.css">
+
 <link rel="stylesheet" href="css/owl.carousel.min.css">
 <link rel="stylesheet" href="css/owl.theme.default.min.css">
 <link rel="stylesheet" href="css/magnific-popup.css">
+
 <link rel="stylesheet" href="css/aos.css">
+
 <link rel="stylesheet" href="css/ionicons.min.css">
+
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<!-- name of the salon can be changed below -->
 			<a class="navbar-brand" href="index">Patricia</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 
@@ -46,22 +48,21 @@
 					<li class="nav-item active"><a href="index" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="index#about" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="index#services" class="nav-link">Services</a></li>
-					<li class="nav-item"><a href="index#appointment"
-						class="nav-link">Appointment</a></li>
+					<li class="nav-item"><a href="index#appointment" class="nav-link">Appointment</a></li>
 					<li class="nav-item"><a href="index#staff" class="nav-link">Staff</a></li>
 					<li class="nav-item"><a href="index#pricing" class="nav-link">Pricing</a></li>
 					<li class="nav-item"><a href="contact" class="nav-link">Contact</a></li>
-					
+
 					<sec:authorize access="isAnonymous()">
 						<li class="nav-item"><a href="signup" class="nav-link">Login</a></li>
 					</sec:authorize>
-					
+
 					<sec:authorize access="hasAuthority('USER')">
 					    <li class="nav-item">
 					    	<a href="customer" class="nav-link">Your Profile</a>
 					    </li>
 					</sec:authorize>
-					
+
 					<sec:authorize access="hasAuthority('ADMIN')">
 					    <li class="nav-item">
 					    	<a href="admin" class="nav-link">Your Profile</a>
@@ -78,6 +79,10 @@
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
 				<form class="login100-form validate-form">
 					<span class="login100-form-title p-b-33"> Login </span>
+					<sec:authorize access="isAnonymous()">
+						<form:form method="POST" action="/customers"
+							modelAttribute="customerForm">
+	
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Valid email is required: ex@abc.xyz">
@@ -96,6 +101,7 @@
 					<div class="container-login100-form-btn m-t-20">
 						<button class="login100-form-btn">Sign in</button>
 					</div>
+					</sec:authorize>
 
 					<div class="text-center p-t-45 p-b-4">
 						<span class="txt1"> Forgot </span> <a href="#" class="txt2 hov1">
@@ -106,6 +112,18 @@
 						<span class="txt1"> Create an account? </span> <a href="signup"
 							class="txt2 hov1"> Sign up </a>
 					</div>
+					<sec:authorize access="hasAuthority('USER')">
+						<li class="nav-item">
+							<span class="login100-form-title p-b-33"><b>You're already logged in.</b></span>
+						</li>
+					</sec:authorize>
+					
+					<sec:authorize access="hasAuthority('ADMIN')">
+						<li class="nav-item">
+							<span class="login100-form-title p-b-33"><b>You're already logged in.</b></span>
+						</li>
+					</sec:authorize>
+	
 				</form>
 			</div>
 		</div>

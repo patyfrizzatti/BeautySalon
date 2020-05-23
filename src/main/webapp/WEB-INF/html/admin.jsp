@@ -5,17 +5,11 @@
 <head>
 <title>Beauty Salon - Admin</title>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="css/main.css">
-<link
-	href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Pacifico"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
 <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="css/animate.css">
 <link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -47,8 +41,7 @@
 					<li class="nav-item active"><a href="index" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="index#about" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="index#services" class="nav-link">Services</a></li>
-					<li class="nav-item"><a href="index#appointment"
-						class="nav-link">Appointment</a></li>
+					<li class="nav-item"><a href="index#appointment" class="nav-link">Appointment</a></li>
 					<li class="nav-item"><a href="index#staff" class="nav-link">Staff</a></li>
 					<li class="nav-item"><a href="index#pricing" class="nav-link">Pricing</a></li>
 					<li class="nav-item"><a href="contact" class="nav-link">Contact</a></li>

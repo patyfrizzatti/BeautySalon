@@ -97,7 +97,7 @@
 				
 				<form action="../paid" class="appointment-form">
 					<div class="form-group">
-						<input type="submit" value="Pay" class="btn btn-primary">
+						<input type="submit" value="Confirm" class="btn btn-primary">
 					</div>
 				</form>
 				

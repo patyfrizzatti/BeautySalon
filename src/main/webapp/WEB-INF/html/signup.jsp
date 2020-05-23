@@ -47,8 +47,7 @@
 					<li class="nav-item active"><a href="index" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="index#about" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="index#services" class="nav-link">Services</a></li>
-					<li class="nav-item"><a href="index#appointment"
-						class="nav-link">Appointment</a></li>
+					<li class="nav-item"><a href="index#appointment" class="nav-link">Appointment</a></li>
 					<li class="nav-item"><a href="index#staff" class="nav-link">Staff</a></li>
 					<li class="nav-item"><a href="index#pricing" class="nav-link">Pricing</a></li>
 					<li class="nav-item"><a href="contact" class="nav-link">Contact</a></li>
@@ -83,8 +82,7 @@
 						modelAttribute="customerForm">
 	
 	
-						<span class="login100-form-title p-b-33" ${visible}> Are you a <b>new
-								customer?</b></br>Register now!
+						<span class="login100-form-title p-b-33" ${visible}> <b>New Account</b>
 						</span>
 						<span class="login100-form-title p-b-33">
 								${message}

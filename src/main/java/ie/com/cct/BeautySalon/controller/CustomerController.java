@@ -84,8 +84,8 @@ public class CustomerController {
 			map.put(i,
 					Formatter.parseLocalDateTimeToString(c.getListBookings().get(i).getSchedule()) + " "
 							+ c.getListBookings().get(i).getProfessional().getName() + " "
-							+ c.getListBookings().get(i).getService().getName() + " €:"
-							+ Formatter.formatterDouble(c.getListBookings().get(i).getTotal()) + " "
+							+ c.getListBookings().get(i).getService().getName() + " "
+							+ Formatter.formatterDouble(c.getListBookings().get(i).getTotal()) + "EUR "
 							+ updateStatus(c.getListBookings().get(i)));
 		}
 

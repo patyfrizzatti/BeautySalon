@@ -70,7 +70,7 @@
 									minTime : '9:00am',
 									maxTime : '19:00:00',
 									slotDuration : "00:60:00",
-									hiddenDays : [ 0 ],
+									hiddenDays : [ 1 ],
 									allDaySlot : false,
 									dateClick : function(info) {
 										if(!(info.view.type == 'dayGridMonth')) {

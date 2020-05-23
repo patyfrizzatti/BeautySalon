@@ -8,7 +8,7 @@ import ie.com.cct.BeautySalon.model.Customer;
 import ie.com.cct.BeautySalon.model.Profile;
 
 /**
- * It's a DTO pattern to receive Customer datas to record
+ * It's a DTO pattern to receive Customer data to record
  * 
  * @author User
  *
