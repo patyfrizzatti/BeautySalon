@@ -32,79 +32,77 @@ import ie.com.cct.BeautySalon.util.Formatter;
 @Controller
 public class CustomerController {
 
-	@Autowired
-	private CustomerRepository customerRepository;
-	@Autowired
-	private ProfileRepository profileRepository;
-	@Autowired
-	private BookingRepository bookingRepository;
+@Autowired
+private CustomerRepository customerRepository;
+@Autowired
+private ProfileRepository profileRepository;
+@Autowired
+private BookingRepository bookingRepository;
 
-	@GetMapping("/customers")
-	public List<Customer> list(@RequestParam(required = false) String name) {
-		List<Customer> list;
-		if (name == null) {
-			list = customerRepository.findAll();
-			return list;
-		} else {
-			list = customerRepository.findByName(name);
-		}
-		return list;
-	}
+@GetMapping("/customers")
+public List<Customer> list(@RequestParam(required = false) String name) {
+List<Customer> list;
+if (name == null) {
+list = customerRepository.findAll();
+return list;
+} else {
+list = customerRepository.findByName(name);
+}
+return list;
+}
 
-	@RequestMapping(value = "/customers", method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("customerForm") CustomerForm form) {
-		Optional<Customer> c = customerRepository.findByEmail(form.getEmail());
-		if (!c.isPresent()) {
+@RequestMapping(value = "/customers", method = RequestMethod.POST)
+public ModelAndView save(@ModelAttribute("customerForm") CustomerForm form) {
+Optional<Customer> c = customerRepository.findByEmail(form.getEmail());
+if (!c.isPresent()) {
 
-			List<Profile> profiles = new ArrayList<>();
-			profiles.add(profileRepository.findById(2L).get());// All new users will be USER
-			Customer customer = form.convert(profiles);
-			customerRepository.save(customer);
-			ModelAndView mav = new ModelAndView("/signupWelcome");
-			mav.addObject("name", form.getName());
-			return mav;
-		} else {
-			ModelAndView mav = new ModelAndView("/signup");
-			mav.addObject("message", "Email " + form.getEmail() + " is already registered. Try another email.");
-			mav.addObject("visible", "style='display: none;'");
+List<Profile> profiles = new ArrayList<>();
+profiles.add(profileRepository.findById(2L).get());// All new users will be USER
+Customer customer = form.convert(profiles);
+customerRepository.save(customer);
+ModelAndView mav = new ModelAndView("/signupWelcome");
+mav.addObject("name", form.getName());
+return mav;
+} else {
+ModelAndView mav = new ModelAndView("/signup");
+mav.addObject("message", "Email " + form.getEmail() + " is already registered. Try another email.");
+mav.addObject("visible", "style='display: none;'");
+return mav;
+}
+}
 
-			return mav;
-		}
-	}
+@RequestMapping(value = "/customer", method = RequestMethod.GET)
+public ModelAndView customer() {
+ModelAndView mav = new ModelAndView("/customer");
+Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+String name = ((UserDetails) principal).getUsername();
+String pass = ((UserDetails) principal).getPassword();
+Customer c = customerRepository.findByNameAndPassword(name, pass).get();
+Map<Long, String> map = new HashMap<Long, String>();
+for (int i = 0; i < c.getListBookings().size(); i++) {
+map.put(c.getListBookings().get(i).getId(),
+Formatter.parseLocalDateTimeToString(c.getListBookings().get(i).getSchedule()) + " "
++ c.getListBookings().get(i).getProfessional().getName() + " "
++ c.getListBookings().get(i).getService().getName() + " €:"
++ Formatter.formatterDouble(c.getListBookings().get(i).getTotal()) + " "
++ updateStatus(c.getListBookings().get(i)));
+}
 
-	@RequestMapping(value = "/customer", method = RequestMethod.GET)
-	public ModelAndView customer() {
-		ModelAndView mav = new ModelAndView("/customer");
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String name = ((UserDetails) principal).getUsername();
-		String pass = ((UserDetails) principal).getPassword();
-		Customer c = customerRepository.findByNameAndPassword(name, pass).get();
-		Map<Integer, String> map = new HashMap<Integer, String>();
-		for (int i = 0; i < c.getListBookings().size(); i++) {
-			map.put(i,
-					Formatter.parseLocalDateTimeToString(c.getListBookings().get(i).getSchedule()) + " "
-							+ c.getListBookings().get(i).getProfessional().getName() + " "
-							+ c.getListBookings().get(i).getService().getName() + " "
-							+ Formatter.formatterDouble(c.getListBookings().get(i).getTotal()) + "EUR "
-							+ updateStatus(c.getListBookings().get(i)));
-		}
+mav.addObject("bookings", map);
+return mav;
+}
 
-		mav.addObject("bookings", map);
-		return mav;
-	}
-
-	private Status updateStatus(Booking booking) {
-		Status s = Status.BOOKED;
-		if(!booking.getStatus().equals(Status.CANCELLED)) {
-			if (booking.getSchedule().isBefore(LocalDateTime.now())
-					&& booking.getSchedule().plus(1, ChronoUnit.HOURS).isBefore(LocalDateTime.now())) {
-				s = Status.COMPLETED;
-			} else if (booking.getSchedule().isBefore(LocalDateTime.now())
-					&& booking.getSchedule().plus(1, ChronoUnit.HOURS).isAfter(LocalDateTime.now())) {
-				s = Status.IN_SERVICE;
-			}
-			bookingRepository.updateStatus(booking.getId(), s);
-		}
-		return s;
-	}
+private Status updateStatus(Booking booking) {
+if(!booking.getStatus().equals(Status.CANCELLED)) {
+if (booking.getSchedule().isBefore(LocalDateTime.now())
+&& booking.getSchedule().plus(1, ChronoUnit.HOURS).isBefore(LocalDateTime.now())) {
+booking.setStatus(Status.COMPLETED);
+} else if (booking.getSchedule().isBefore(LocalDateTime.now())
+&& booking.getSchedule().plus(1, ChronoUnit.HOURS).isAfter(LocalDateTime.now())) {
+booking.setStatus(Status.IN_SERVICE);
+}
+bookingRepository.updateStatus(booking.getId(), booking.getStatus());
+}
+return booking.getStatus();
+}
 }
