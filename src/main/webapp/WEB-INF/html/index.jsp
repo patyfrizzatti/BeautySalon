@@ -320,19 +320,18 @@
 		</div>
 	</section>
 
-	<section class="ftco-section ftco-no-pt ftco-booking" id="appointment">
+	<section class="ftco-section ftco-no-pt ftco-booking">
 		<div class="container-fluid px-0">
 			<div class="row no-gutters d-md-flex justify-content-end">
 				<div class="one-forth d-flex align-items-end">
 					<div class="text">
 						<div class="overlay"></div>
-						<div class="appointment-wrap">
+						<div class="appointment-wrap" id="appointment">
 							<span class="subheading">Reservation</span>
 							<h3 class="mb-2">Make an Appointment</h3>
 							<form action="services" class="appointment-form">
 								<div class="form-group">
-									<input type="submit" value="Make an Appointment"
-										class="btn btn-primary">
+									<input type="submit" value="Make an Appointment" class="btn btn-primary">
 								</div>
 							</form>
 						</div>
@@ -843,8 +842,7 @@
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/jquery.timepicker.min.js"></script>
 	<script src="js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
 
